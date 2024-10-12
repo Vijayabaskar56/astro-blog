@@ -1,0 +1,69 @@
+---
+import type { GetStaticPathsOptions } from "astro";
+import { getCollection } from "astro:content";
+import { PageSize } from "~/config";
+import ScaffoldLayout from "~/layouts/ScaffoldLayout.astro";
+import { getPhotos } from "~/utils/collection";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  return paginate(await getPhotos(), { pageSize: PageSize });
+}
+
+const { page } = Astro.props;
+console.log(page.data);
+---
+
+<ScaffoldLayout title="Blog" description="Latest sarticles." currentNav="Blog">
+  <div class="min-h-screen p-8">
+    <h1 class="text-4xl font-bold mb-8 text-center">Astro Photo Gallery</h1>
+    <div
+      id="gallery"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto"
+    >
+      {
+        page.data.map((photo): any => (
+          <div class="relative overflow-hidden rounded-lg shadow-lg group">
+            <img
+              src={photo.data?.src}
+              alt={`Astro page of ${photo.place}`}
+              width={photo?.width}
+              height={photo?.height}
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+                <p class="text-sm font-semibold">{photo.data.place}</p>
+                <p class="text-xs">{photo.data.time}</p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</ScaffoldLayout>
+
+<script>
+  const gallery = document.getElementById("gallery");
+  console.log(gallery);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target.querySelector("img");
+          if (img && img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute("data-src");
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { rootMargin: "200px" }
+  );
+
+  document.querySelectorAll("#gallery > div").forEach((item) => {
+    observer.observe(item);
+  });
+</script>

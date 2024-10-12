@@ -1,0 +1,17 @@
+<script is:inline src="https://kwesforms.com/v2/kwes-script.js" defer></script>
+<script>
+  const canvas = document.getElementById("canvas");
+  const r = new (window?.rive && window?.rive).Rive({
+    src: "/robot_controller_test.riv",
+    canvas: canvas,
+    autoplay: true,
+    stateMachines: ["Wave", "Idle"],
+  });
+  if (canvas) {
+    canvas.addEventListener("click", () => {
+      r.play("Wave");
+    });
+  }
+</script>
+<script is:inline src="https://unpkg.com/@rive-app/canvas@2.7.0"></script>
+<canvas id="canvas" width="600" height="500"></canvas>
