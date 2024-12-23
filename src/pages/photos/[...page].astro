@@ -1,12 +1,11 @@
 ---
-import type { GetStaticPathsOptions } from "astro";
-import { getCollection } from "astro:content";
-import { PageSize } from "~/config";
-import ScaffoldLayout from "~/layouts/ScaffoldLayout.astro";
-import { getPhotos } from "~/utils/collection";
+import type { GetStaticPathsOptions } from 'astro';
+import { PageSize } from '~/config';
+import ScaffoldLayout from '~/layouts/ScaffoldLayout.astro';
+import { getPhotos } from '~/utils/collection';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  return paginate(await getPhotos(), { pageSize: PageSize });
+	return paginate(await getPhotos(), { pageSize: PageSize });
 }
 
 const { page } = Astro.props;
@@ -25,9 +24,7 @@ console.log(page.data);
           <div class="relative overflow-hidden rounded-lg shadow-lg group">
             <img
               src={photo.data?.src}
-              alt={`Astro page of ${photo.place}`}
-              width={photo?.width}
-              height={photo?.height}
+              alt={`Astro page of ${photo.id}`}
               class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               loading="lazy"
             />

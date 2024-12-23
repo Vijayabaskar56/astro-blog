@@ -1,25 +1,25 @@
 ---
-import { ViewTransitions } from "astro:transitions";
-import { SiteLanguage, SiteTitle } from "~/config";
-import "lxgw-wenkai-screen-web/lxgwwenkaigbscreen/result.css";
+import { ViewTransitions } from 'astro:transitions';
+import { SiteLanguage, SiteTitle } from '~/config';
+import 'lxgw-wenkai-screen-web/lxgwwenkaigbscreen/result.css';
 
 export interface Props {
-  title?: string;
-  description?: string;
-  socialImage?: string;
-  rootClass?:
-    | Iterable<
-        string | Record<string, boolean> | string[] | false | null | undefined
-      >
-    | string;
-  bodyClass?:
-    | Iterable<
-        string | Record<string, boolean> | string[] | false | null | undefined
-      >
-    | string;
+	title?: string;
+	description?: string;
+	socialImage?: string;
+	rootClass?:
+		| Iterable<
+				string | Record<string, boolean> | string[] | false | null | undefined
+		  >
+		| string;
+	bodyClass?:
+		| Iterable<
+				string | Record<string, boolean> | string[] | false | null | undefined
+		  >
+		| string;
 }
 const { title, description, socialImage, rootClass, bodyClass } = Astro.props;
-const socialImg = new URL(socialImage ?? "/og.png", Astro.url).href;
+const socialImg = new URL(socialImage ?? '/og.png', Astro.url).href;
 ---
 
 <html lang={SiteLanguage} class:list={rootClass}>
