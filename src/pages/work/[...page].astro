@@ -25,7 +25,9 @@ const groupedWorkItems = sortedWorkItems.reduce(
   {} as Record<string, any[]>
 );
 
-const years = Object.keys(groupedWorkItems).sort((a, b) => b - a);
+const years = Object.keys(groupedWorkItems).sort(
+  (a, b) => Number(b) - Number(a)
+);
 ---
 
 <ScaffoldLayout title="Blog" description="Latest articles." currentNav="Blog">
@@ -47,7 +49,6 @@ const years = Object.keys(groupedWorkItems).sort((a, b) => b - a);
                         <iframe
                           src={`https://www.youtube.com/embed/${new URL(item.data.content).searchParams.get("v")}`}
                           title={item.data.title}
-                          frameborder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowfullscreen
                           class="w-full h-full"
