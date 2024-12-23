@@ -1,33 +1,31 @@
 ---
-import { getCollection } from 'astro:content';
-import type { GetStaticPathsOptions } from 'astro';
-import { PageSize } from '~/config';
-import ScaffoldLayout from '~/layouts/ScaffoldLayout.astro';
+import type { GetStaticPathsOptions } from "astro";
+import { getCollection } from "astro:content";
+import { PageSize } from "~/config";
+import ScaffoldLayout from "~/layouts/ScaffoldLayout.astro";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-	return paginate(await getCollection('work'), { pageSize: PageSize });
+  return paginate(await getCollection("work"), { pageSize: PageSize });
 }
 
 const { page } = Astro.props;
 const sortedWorkItems = page.data.sort(
-	(a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 
-const groupedWorkItems: { [key: number]: any[] } = sortedWorkItems.reduce(
-	(acc: { [key: number]: any[] }, item) => {
-		const year = new Date(item.data.date).getFullYear();
-		if (!acc[year]) {
-			acc[year] = [];
-		}
-		acc[year].push(item);
-		return acc;
-	},
-	{},
+const groupedWorkItems = sortedWorkItems.reduce(
+  (acc, item) => {
+    const year = new Date(item.data.date).getFullYear();
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(item);
+    return acc;
+  },
+  {} as Record<string, any[]>
 );
 
-const years: string[] = Object.keys(groupedWorkItems).sort(
-	(a, b) => Number.parseInt(b) - Number.parseInt(a),
-) as string[];
+const years = Object.keys(groupedWorkItems).sort((a, b) => b - a);
 ---
 
 <ScaffoldLayout title="Blog" description="Latest articles." currentNav="Blog">
@@ -36,20 +34,20 @@ const years: string[] = Object.keys(groupedWorkItems).sort(
     <div class="relative">
       <div class="absolute left-4 top-0 bottom-0 w-px bg-gray-700"></div>
       {
-        years.map((year: string) => (
+        years.map((year) => (
           <div class="mb-16 relative">
             <div class="absolute left-4 top-2 w-3 h-3 bg-primary rounded-full -translate-x-1/2" />
             <div class="ml-12">
               <h2 class="text-2xl font-semibold mb-4">{year}</h2>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                // @ts-nocheck // @ts-ignore
-                {groupedWorkItems[year as unknown as number].map((item) => (
+                {groupedWorkItems[year].map((item) => (
                   <div class="bg-primary rounded-lg overflow-hidden shadow-lg">
                     {item.data.type === "youtube" && (
                       <div class="aspect-video">
                         <iframe
                           src={`https://www.youtube.com/embed/${new URL(item.data.content).searchParams.get("v")}`}
                           title={item.data.title}
+                          frameborder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowfullscreen
                           class="w-full h-full"
