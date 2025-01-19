@@ -1,8 +1,8 @@
 ---
 slug: 2025_goals
-title: Day 2 of nights and weekends
-description: What do they got in there? King Kong? You're a very talented young man, with your own clever thoughts and ideas. Do you need a manager? I was part of something special. Did he just throw my cat out of the window? Do you have any idea how long it takes those cups to decompose.
-image: ../attachments/100.jpg
+title: Let this year be my fucking year
+description: My 2025 Goals and a reflection of my vision and anti vision
+image: ../attachments/2025_goals.jpg
 date: 2025-01-05T17:06:27.169Z
 lastmod: 2025-01-05T17:06:27.169Z
 hidden: false
