@@ -69,12 +69,11 @@ For those who want a launcher that does more than just look good, Kvaesitso is a
 
 ## And Here is a Glimps of  Setup
 
-<div style="display: flex; flex-wrap: wrap; justify-content: center;">
-  <img src="../attachments/launch_one.jpg" style="width: 30%; margin: 5px;">
-  <img src="../attachments/launch_con.jpg" style="width: 30%; margin: 5px;">
-  <img src="../attachments/launch_map.jpg" style="width: 30%; margin: 5px;">
-  <img src="../attachments/launch_wid.jpg" style="width: 30%; margin: 5px;">
-</div>
+![Home Page](../attachments/launch_one.jpg)
+![Contact Search](../attachments/launch_con.jpg)
+![Map Search](../attachments/launch_map.jpg)
+![Search File](../attachments/launch_file.jpg)
+![Widget Screen](../attachments/launch_wid.jpg)
 
 ## Final Thoughts
 
