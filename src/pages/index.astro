@@ -1,7 +1,7 @@
 ---
-import RiveComponent from '~/components/RiveComponent.astro';
-import { SiteDescription, SiteTitle } from '~/config';
-import MarkdownLayout from '~/layouts/MarkdownLayout.astro';
+import RiveComponent from "~/components/RiveComponent.astro";
+import { SiteDescription, SiteTitle } from "~/config";
+import MarkdownLayout from "~/layouts/MarkdownLayout.astro";
 ---
 
 <MarkdownLayout
@@ -10,7 +10,7 @@ import MarkdownLayout from '~/layouts/MarkdownLayout.astro';
   hide={["title", "comments"]}
   currentNav="Home"
 >
-  <div class="flex flex-col items-center gap-4 xl:flex-row">
+  <div class="flex flex-col items-center justify-evenly xl:flex-row">
     <!-- <Picture
       class="lg:max-w-md"
       src={img}
@@ -20,9 +20,10 @@ import MarkdownLayout from '~/layouts/MarkdownLayout.astro';
     /> -->
     <RiveComponent />
     <div>
-      <p>
-        <span style="font-size: 30px;">👋</span> Hey I am <span
-          style="color: #cb5c40; font-size: 20px;">Vijayabaskar</span
+      <p class="sm:text-2xl text-xl">
+        <span>👋</span> Hey I am <span
+          style="color: #cb5c40;"
+          class="md:text-4xl text-2xl">Vijayabaskar</span
         >,
         <br />
         a Full Stack Developer from India
