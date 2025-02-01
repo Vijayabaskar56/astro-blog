@@ -1,3 +1,14 @@
+---
+slug: compiler-desing
+title: Understanding the phases of a Compiler - A Visual Guide
+description: Compilers are complex systems that translate high-level programming languages into machine code that can be executed by a computer. This process involves multiple stages, each with its own responsibility. In this blog post, we will explore the different phases of a compiler, supported by a sequence diagram that visually represents the interactions between these phases.
+image: ../attachments/100.jpg
+date: 2025-02-01T16:42:04Z
+lastmod: 2025-02-01T16:42:04Z
+hidden: false
+---
+
+
 # Understanding the Phases of a Compiler - A Visual Guide
 
 Compilers are complex systems that translate high-level programming languages into machine code that can be executed by a computer. This process involves multiple stages, each with its own responsibility. In this blog post, we will explore the different phases of a compiler, supported by a sequence diagram that visually represents the interactions between these phases.
