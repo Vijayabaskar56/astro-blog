@@ -1,11 +1,11 @@
 ---
-import type { GetStaticPathsOptions } from "astro";
-import { PageSize } from "~/config";
-import ScaffoldLayout from "~/layouts/ScaffoldLayout.astro";
-import { getPhotos } from "~/utils/collection";
+import type { GetStaticPathsOptions } from 'astro';
+import { PageSize } from '~/config';
+import ScaffoldLayout from '~/layouts/ScaffoldLayout.astro';
+import { getPhotos } from '~/utils/collection';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  return paginate(await getPhotos(), { pageSize: PageSize });
+	return paginate(await getPhotos(), { pageSize: PageSize });
 }
 
 const { page } = Astro.props;

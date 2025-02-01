@@ -1,32 +1,32 @@
 ---
-import { getCollection } from "astro:content";
-import type { GetStaticPathsOptions } from "astro";
-import { PageSize } from "~/config";
-import ScaffoldLayout from "~/layouts/ScaffoldLayout.astro";
+import { getCollection } from 'astro:content';
+import type { GetStaticPathsOptions } from 'astro';
+import { PageSize } from '~/config';
+import ScaffoldLayout from '~/layouts/ScaffoldLayout.astro';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  return paginate(await getCollection("work"), { pageSize: PageSize });
+	return paginate(await getCollection('work'), { pageSize: PageSize });
 }
 
 const { page } = Astro.props;
 const sortedWorkItems = page.data.sort(
-  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+	(a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
 );
 
 const groupedWorkItems = sortedWorkItems.reduce(
-  (acc, item) => {
-    const year = new Date(item.data.date).getFullYear();
-    if (!acc[year]) {
-      acc[year] = [];
-    }
-    acc[year].push(item);
-    return acc;
-  },
-  {} as Record<string, typeof sortedWorkItems>
+	(acc, item) => {
+		const year = new Date(item.data.date).getFullYear();
+		if (!acc[year]) {
+			acc[year] = [];
+		}
+		acc[year].push(item);
+		return acc;
+	},
+	{} as Record<string, typeof sortedWorkItems>,
 );
 
 const years = Object.keys(groupedWorkItems).sort(
-  (a, b) => Number(b) - Number(a)
+	(a, b) => Number(b) - Number(a),
 );
 ---
 

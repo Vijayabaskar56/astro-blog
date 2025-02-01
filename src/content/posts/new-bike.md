@@ -25,3 +25,4 @@ I am always a average person, in studies , sports and most of everything, I neve
 The Way I think about time, money, knowledge everything is changing or it safe to say evolving every day. I see life as a game now and when I trying really hard at something and put in the time and mental effect it needed, I can do anything and learn anything, and in the game of life you get power up, life lines, and level up.
 
 And this way of thinking about life is rewarding. so I am trying hard to improve ,myself and I see this bike a Power up that from the Universe for my efforts, that I am putting, and I if I continue to put in the effort and work. I know anything is possible and I can achieve all my goals , and time to time I get this power up form the universe or (my mind be like : it's not universe it your brother you idiot), and It's my responsibilities to use these power-up wisely wisely
+
