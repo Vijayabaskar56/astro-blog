@@ -1,25 +1,25 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import { Icon } from "astro-icon/components";
-import Comments from "~/components/Comments.astro";
-import { Hide, type HideElements } from "~/config";
-import type { PostHideElements } from "~/content/config";
-import ScaffoldLayout from "./ScaffoldLayout.astro";
-import "katex/dist/katex.css";
+import type { CollectionEntry } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import Comments from '~/components/Comments.astro';
+import { Hide, type HideElements } from '~/config';
+import type { PostHideElements } from '~/content/config';
+import ScaffoldLayout from './ScaffoldLayout.astro';
+import 'katex/dist/katex.css';
 
-type Props = CollectionEntry<"posts">["data"] & {
-  currentNav?: string;
-  socialImage?: string;
+type Props = CollectionEntry<'posts'>['data'] & {
+	currentNav?: string;
+	socialImage?: string;
 };
 const { title, date, lastmod, tags, readingTime, hide } = Astro.props;
 const show = (key: string) =>
-  !(
-    Hide.includes(key as HideElements) ||
-    hide?.includes(key as PostHideElements)
-  );
-const showDate = date && show("date");
-const showLastmod = lastmod && show("lastmod");
-const showReadingTime = readingTime && show("readingTime");
+	!(
+		Hide.includes(key as HideElements) ||
+		hide?.includes(key as PostHideElements)
+	);
+const showDate = date && show('date');
+const showLastmod = lastmod && show('lastmod');
+const showReadingTime = readingTime && show('readingTime');
 const showTimes = showDate || showLastmod || showReadingTime;
 ---
 
@@ -133,5 +133,35 @@ const showTimes = showDate || showLastmod || showReadingTime;
   );
   for (const copyButton of copyButtons) {
     copyButton.addEventListener("click", () => copy(copyButton));
+  }
+  /**
+   * @params {HTMLCollectionOf<HTMLElement>} graphs
+   */
+  async function renderDiagrams(graphs) {
+    const { default: mermaid } = await import("mermaid");
+    mermaid.initialize({
+      startOnLoad: false,
+      fontFamily: "var(--sans-font)",
+      // @ts-ignore This works, but TS expects a enum for some reason
+      theme: window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "default",
+    });
+
+    for (const graph of graphs) {
+      const content = graph.getAttribute("data-content");
+      if (!content) continue;
+      let svg = document.createElement("svg");
+      const id = (svg.id = "mermaid-" + Math.round(Math.random() * 100000));
+      graph.appendChild(svg);
+      mermaid.render(id, content).then((result) => {
+        graph.innerHTML = result.svg;
+      });
+    }
+  }
+
+  const graphs = document.getElementsByClassName("mermaid");
+  if (document.getElementsByClassName("mermaid").length > 0) {
+    renderDiagrams(graphs);
   }
 </script>

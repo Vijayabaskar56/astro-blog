@@ -2,7 +2,7 @@
 slug: compiler-desing
 title: Understanding the phases of a Compiler - A Visual Guide
 description: Compilers are complex systems that translate high-level programming languages into machine code that can be executed by a computer. This process involves multiple stages, each with its own responsibility. In this blog post, we will explore the different phases of a compiler, supported by a sequence diagram that visually represents the interactions between these phases.
-image: ../attachments/100.jpg
+image: ../attachments/compiler-desing.png
 date: 2025-02-01T16:42:04Z
 lastmod: 2025-02-01T16:42:04Z
 hidden: false
@@ -27,56 +27,7 @@ A compiler operates in distinct phases, each performing a specific task to conve
 
 Below is a sequence diagram illustrating the flow of data and interactions between the various components of a compiler:
 
-```mermaid
-sequenceDiagram
-    participant Source Program
-    participant Lexical Analysis
-    participant Syntax Analysis
-    participant Intermediate Code Generation
-    participant Code Optimization
-    participant Code Generation
-    participant Target Program
-    participant Symbol Table
-    participant Error Handler
-
-    Source Program->>Lexical Analysis: Reads source code
-    activate Lexical Analysis
-    Lexical Analysis-->>Source Program: Requests next character
-    Lexical Analysis->>Lexical Analysis: Groups characters into tokens
-    Lexical Analysis->>Symbol Table: Stores identifier information
-    Lexical Analysis->>Syntax Analysis: Sends token stream
-    deactivate Lexical Analysis
-    activate Syntax Analysis
-    Syntax Analysis-->>Lexical Analysis: Requests next token
-    Syntax Analysis->>Syntax Analysis: Checks token order against grammar, creates parse tree
-    Syntax Analysis->>Symbol Table: Retrieves/Updates identifier information
-    Syntax Analysis->>Intermediate Code Generation: Sends parse tree
-    deactivate Syntax Analysis
-    activate Intermediate Code Generation
-    Intermediate Code Generation->>Intermediate Code Generation: Transforms parse tree into intermediate code
-    Intermediate Code Generation->>Symbol Table: Retrieves identifier information
-    Intermediate Code Generation->>Code Optimization: Sends intermediate code
-    deactivate Intermediate Code Generation
-    activate Code Optimization
-    Code Optimization->>Code Optimization: Improves intermediate code
-    Code Optimization->>Symbol Table: Retrieves identifier information
-    Code Optimization->>Code Generation: Sends optimized intermediate code
-    deactivate Code Optimization
-    activate Code Generation
-    Code Generation->>Code Generation: Translates intermediate code to machine code
-    Code Generation->>Symbol Table: Retrieves identifier information
-    Code Generation->>Target Program: Sends machine code
-    deactivate Code Generation
-    Target Program-->>Source Program: Provides output
-    
-    Lexical Analysis-->>Error Handler: Reports lexical errors
-    Syntax Analysis-->>Error Handler: Reports syntax errors
-    Intermediate Code Generation-->>Error Handler: Reports semantic errors
-    Code Optimization-->>Error Handler: Reports optimization errors
-    Code Generation-->>Error Handler: Reports code generation errors
-    
-    Note over Symbol Table,Error Handler:Shared resource used throughout compilation
-```
+![Compiler Flow Diagram](../attachments/compiler-desing.png)
 
 ## **Phase Breakdown**
 
